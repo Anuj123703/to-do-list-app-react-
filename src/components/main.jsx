@@ -50,14 +50,13 @@ const Main = () => {
         newtodos[index].isComplete = !newtodos[index].isComplete;
         settodos(newtodos);
     }
-    const handledelete = (e) => {
-        let id = e.target.name;
+    const handledelete = (id) => {
         let newtodos = todos.filter(items => items.id != id);
         settodos(newtodos);
     }
-    const handleedit = (e) => {
-        let id = e.target.name;
+    const handleedit = (id) => {
         let edititem = todos.find(item => item.id === id);
+        if(!edititem) return;
         settodo(edititem.todo);
         seteditid(id);
     }
@@ -153,14 +152,14 @@ const Main = () => {
                                     <div className="flex gap-2 justify-end">
                                         <button
                                             name={items.id}
-                                            onClick={handledelete}
+                                            onClick={() => handledelete(items.id)}
                                             className='bg-red-900 border p-2 rounded text-white'
                                         >
                                             <AiTwotoneDelete />
                                         </button>
                                         <button
                                             name={items.id}
-                                            onClick={handleedit}
+                                            onClick={() => handleedit(items.id)}
                                             className='bg-green-700 p-2 rounded text-white'
                                         >
                                             <FaEdit />
